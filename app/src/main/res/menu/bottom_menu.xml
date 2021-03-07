@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="For You"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_newspaper"
+        android:id="@+id/action_home"
+        android:enabled="true"
+        />
+
+    <item
+        android:title="Headlines"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_globe"
+        android:id="@+id/action_search"
+        android:enabled="true"
+        />
+
+</menu>
