@@ -27,4 +27,11 @@ public interface AllApiIneterface {
             @Part("id") String id
     );
 
+    @Multipart
+    @POST("newsapp/api/getCityId.php")
+    Call<cityIdBean> getCityId(
+            @Part("lat") String lat,
+            @Part("lng") String lng
+    );
+
 }
