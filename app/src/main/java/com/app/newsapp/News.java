@@ -13,12 +13,26 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.app.newsapp.cityPOJO.Datum;
+import com.app.newsapp.cityPOJO.cityBean;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class News extends Fragment {
 
     ProgressBar progress;
-    //String id, title;
     TabLayout tabs;
     ViewPager pager;
     MainActivity mainActivity;
@@ -28,24 +42,13 @@ public class News extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.news, container, false);
         mainActivity = (MainActivity) getActivity();
-/*
-        id = getArguments().getString("id");
-        title = getArguments().getString("title");
-*/
 
 
         tabs = view.findViewById(R.id.tabs);
         progress = view.findViewById(R.id.progressBar2);
         pager = view.findViewById(R.id.pager);
 
-
-        //PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
-
-       /* PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        pager.setAdapter(adapter);
-        tabs.setupWithViewPager(pager);*/
-
-        /*progress.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.VISIBLE);
 
         Bean b = (Bean) mainActivity.getApplicationContext();
 
@@ -63,16 +66,15 @@ public class News extends Fragment {
                 .build();
         AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-        Call<subCat1Bean> call = cr.getSubCat2(id);
-        call.enqueue(new Callback<subCat1Bean>() {
+        Call<cityBean> call = cr.getCities();
+        call.enqueue(new Callback<cityBean>() {
             @Override
-            public void onResponse(Call<subCat1Bean> call, Response<subCat1Bean> response) {
+            public void onResponse(Call<cityBean> call, Response<cityBean> response) {
 
 
-                if (response.body().getStatus().equals("1"))
-                {
+                if (response.body().getStatus().equals("1")) {
 
-                    PagerAdapter adapter = new PagerAdapter(getChildFragmentManager() , response.body().getData());
+                    PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, response.body().getData());
                     pager.setAdapter(adapter);
                     tabs.setupWithViewPager(pager);
 
@@ -84,10 +86,10 @@ public class News extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<subCat1Bean> call, Throwable t) {
+            public void onFailure(Call<cityBean> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
-        });*/
+        });
 
 
         return view;
@@ -101,44 +103,35 @@ public class News extends Fragment {
 
     }
 
-    /*class PagerAdapter extends FragmentStatePagerAdapter {
+    class PagerAdapter extends FragmentStatePagerAdapter {
 
-        String[] titles = {
-                "All",
-                "Pending",
-                "Rescheduled",
-                "Packed",
-                "Shipped",
-                "Hold"
-        };
+        List<Datum> list = new ArrayList<>();
 
-        public PagerAdapter(@NonNull FragmentManager fm, int behavior) {
+        public PagerAdapter(@NonNull FragmentManager fm, int behavior, List<Datum> list) {
             super(fm, behavior);
+            this.list = list;
         }
-
-        //List<Datum> list = new ArrayList<>();
 
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            return titles[position];
+            return list.get(position).getCity();
         }
 
 
         @Override
         public Fragment getItem(int position) {
-            orderlist frag = new orderlist();
-            *//*Bundle b = new Bundle();
-            b.putString("id" , list.get(position).getId());
+            newsList frag = new newsList();
+            Bundle b = new Bundle();
+            b.putString("id", list.get(position).getId());
             frag.setArguments(b);
-            *//*
             return frag;
         }
 
         @Override
         public int getCount() {
-            return 6;
+            return list.size();
         }
-    }*/
+    }
 
 }
