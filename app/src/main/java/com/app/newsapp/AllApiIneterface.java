@@ -34,4 +34,13 @@ public interface AllApiIneterface {
             @Part("lng") String lng
     );
 
+    @Multipart
+    @POST("newsapp/api/login.php")
+    Call<loginBean> login(
+            @Part("email") String email,
+            @Part("password") String password,
+            @Part("name") String name,
+            @Part("token") String token
+    );
+
 }

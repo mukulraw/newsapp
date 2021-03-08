@@ -74,9 +74,14 @@ public class News extends Fragment {
 
                 if (response.body().getStatus().equals("1")) {
 
-                    PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, response.body().getData());
-                    pager.setAdapter(adapter);
-                    tabs.setupWithViewPager(pager);
+                    try {
+                        PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, response.body().getData());
+                        pager.setAdapter(adapter);
+                        tabs.setupWithViewPager(pager);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
 
                 }
 
