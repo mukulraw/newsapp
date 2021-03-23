@@ -27,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import me.kaelaela.verticalviewpager.VerticalViewPager;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -37,12 +36,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class verticalNews extends Fragment {
+public class verticalNews2 extends Fragment {
 
     RoundedImageView image;
     TextView title, content, date, read;
     ProgressBar progress;
-    MainActivity2 mainActivity;
+    NewsActivity mainActivity;
     String id;
     CardView youtube;
     ImageView youtubeimage;
@@ -51,7 +50,7 @@ public class verticalNews extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.vertical_news, container, false);
-        mainActivity = (MainActivity2) getActivity();
+        mainActivity = (NewsActivity) getActivity();
 
         id = getArguments().getString("id");
 

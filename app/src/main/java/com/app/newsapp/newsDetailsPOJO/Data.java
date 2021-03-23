@@ -31,6 +31,9 @@ public class Data {
     @SerializedName("created")
     @Expose
     private String created;
+    @SerializedName("page_link")
+    @Expose
+    private String page_link;
 
     public String getId() {
         return id;
@@ -104,4 +107,11 @@ public class Data {
         this.created = created;
     }
 
+    public String getPage_link() {
+        return page_link;
+    }
+
+    public void setPage_link(String page_link) {
+        this.page_link = page_link;
+    }
 }
