@@ -1,5 +1,6 @@
 package com.app.newsapp;
 
+import com.app.newsapp.catPOJO.catBean;
 import com.app.newsapp.cityPOJO.cityBean;
 import com.app.newsapp.newsDetailsPOJO.newsDetailsBean;
 import com.app.newsapp.newsPOJO.newsBean;
@@ -11,6 +12,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 public interface AllApiIneterface {
+
+    @GET("newsapp/api/getCat.php")
+    Call<catBean> getCat();
 
     @GET("newsapp/api/getCities.php")
     Call<cityBean> getCities();

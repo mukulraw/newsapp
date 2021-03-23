@@ -111,11 +111,11 @@ public class Splash extends AppCompatActivity {
             public void run() {
 
                 if (id.length() > 0) {
-                    Intent intent = new Intent(Splash.this, MainActivity.class);
+                    Intent intent = new Intent(Splash.this, MainActivity2.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    Intent intent = new Intent(Splash.this, MainActivity.class);
+                    Intent intent = new Intent(Splash.this, MainActivity2.class);
                     startActivity(intent);
                     finish();
                 }
