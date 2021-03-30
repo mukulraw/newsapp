@@ -35,8 +35,8 @@ public class MainActivity2 extends AppCompatActivity {
     class PagerAdapter extends FragmentStatePagerAdapter {
 
         String[] titles = new String[]{
-                "Categories",
-                "News"
+                "कैटागरिज़",
+                "न्यूज"
         };
 
         public PagerAdapter(@NonNull FragmentManager fm, int behavior) {

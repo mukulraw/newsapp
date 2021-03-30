@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.newsapp.breakingPOJO.breakingBean;
 import com.app.newsapp.catPOJO.Datum;
 import com.app.newsapp.catPOJO.catBean;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -60,11 +61,13 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class categories extends Fragment {
 
-    RecyclerView grid;
+    RecyclerView grid, grid2;
     ProgressBar progress;
     MainActivity2 mainActivity;
     BestAdapter adapter;
+    BestAdapter2 adapter2;
     List<Datum> list;
+    List<com.app.newsapp.breakingPOJO.Datum> list2;
     CircleImageView profile;
     private FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
@@ -88,16 +91,23 @@ public class categories extends Fragment {
         mGoogleSignInClient = GoogleSignIn.getClient(mainActivity, gso);
 
         list = new ArrayList<>();
+        list2 = new ArrayList<>();
 
         grid = view.findViewById(R.id.grid);
+        grid2 = view.findViewById(R.id.grid2);
         progress = view.findViewById(R.id.progressBar6);
         profile = view.findViewById(R.id.imageView3);
 
         adapter = new BestAdapter(mainActivity, list);
+        adapter2 = new BestAdapter2(mainActivity, list2);
         GridLayoutManager manager = new GridLayoutManager(mainActivity, 3);
+        GridLayoutManager manager2 = new GridLayoutManager(mainActivity, 1);
 
-        grid.setAdapter(adapter);
-        grid.setLayoutManager(manager);
+        grid.setAdapter(adapter2);
+        grid.setLayoutManager(manager2);
+
+        grid2.setAdapter(adapter);
+        grid2.setLayoutManager(manager);
 
         progress.setVisibility(View.VISIBLE);
 
@@ -134,6 +144,24 @@ public class categories extends Fragment {
 
             @Override
             public void onFailure(Call<catBean> call, Throwable t) {
+                progress.setVisibility(View.GONE);
+            }
+        });
+        progress.setVisibility(View.VISIBLE);
+        Call<breakingBean> call1 = cr.getBreaking();
+
+        call1.enqueue(new Callback<breakingBean>() {
+            @Override
+            public void onResponse(Call<breakingBean> call, Response<breakingBean> response) {
+                if (response.body().getStatus().equals("1")) {
+                    adapter2.setData(response.body().getData());
+                }
+
+                progress.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<breakingBean> call, Throwable t) {
                 progress.setVisibility(View.GONE);
             }
         });
@@ -266,6 +294,71 @@ public class categories extends Fragment {
             }
         }
     }
+
+
+    class BestAdapter2 extends RecyclerView.Adapter<BestAdapter2.ViewHolder> {
+
+        Context context;
+        List<com.app.newsapp.breakingPOJO.Datum> list = new ArrayList<>();
+
+        public BestAdapter2(Context context, List<com.app.newsapp.breakingPOJO.Datum> list) {
+            this.context = context;
+            this.list = list;
+        }
+
+        public void setData(List<com.app.newsapp.breakingPOJO.Datum> list) {
+            this.list = list;
+            notifyDataSetChanged();
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.breaking_list_model, parent, false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+            holder.setIsRecyclable(false);
+
+            final com.app.newsapp.breakingPOJO.Datum item = list.get(position);
+
+            holder.title.setText(item.getTitle());
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(mainActivity, Web.class);
+                    intent.putExtra("url", item.getLink());
+                    startActivity(intent);
+
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+
+            TextView title;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                title = itemView.findViewById(R.id.textView21);
+
+            }
+        }
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

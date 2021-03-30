@@ -1,5 +1,6 @@
 package com.app.newsapp;
 
+import com.app.newsapp.breakingPOJO.breakingBean;
 import com.app.newsapp.catPOJO.catBean;
 import com.app.newsapp.cityPOJO.cityBean;
 import com.app.newsapp.newsDetailsPOJO.newsDetailsBean;
@@ -15,6 +16,9 @@ public interface AllApiIneterface {
 
     @GET("newsapp/api/getCat.php")
     Call<catBean> getCat();
+
+    @GET("newsapp/api/getBreaking.php")
+    Call<breakingBean> getBreaking();
 
     @GET("newsapp/api/getCities.php")
     Call<cityBean> getCities();
