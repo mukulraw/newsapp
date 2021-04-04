@@ -95,29 +95,35 @@ public class verticalNews2 extends Fragment {
                     DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
                     ImageLoader loader = ImageLoader.getInstance();
                     loader.displayImage(item.getThumbnail(), image, options);
-                    loader.displayImage(item.getYoutubeThumbnail(), youtubeimage, options);
+                    if (item.getYoutubeLink().length() > 0)
+                    {
+                        loader.displayImage(item.getYoutubeThumbnail(), youtubeimage, options);
+                        final String iidd = getYouTubeId(item.getYoutubeLink());
+                        youtube.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + iidd));
+                                Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse("http://www.youtube.com/watch?v=" + iidd));
+                                try {
+                                    startActivity(appIntent);
+                                } catch (ActivityNotFoundException ex) {
+                                    startActivity(webIntent);
+                                }
+
+                            }
+                        });
+                        youtube.setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        youtube.setVisibility(View.GONE);
+                    }
 
                     title.setText(item.getTitle());
                     date.setText(item.getCreated());
                     content.setText(Html.fromHtml(item.getContent()));
-
-                    final String iidd = getYouTubeId(item.getYoutubeLink());
-
-                    youtube.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                            Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + iidd));
-                            Intent webIntent = new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse("http://www.youtube.com/watch?v=" + iidd));
-                            try {
-                                startActivity(appIntent);
-                            } catch (ActivityNotFoundException ex) {
-                                startActivity(webIntent);
-                            }
-
-                        }
-                    });
 
                     read.setOnClickListener(new View.OnClickListener() {
                         @Override

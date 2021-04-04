@@ -93,6 +93,9 @@
         android:layout_height="150dp"
         android:background="@drawable/white_gradient"
         android:elevation="2dp"
+        android:fontFamily="monospace"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="-16dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="@+id/textView13"
         app:layout_constraintStart_toStartOf="@+id/textView13" />
