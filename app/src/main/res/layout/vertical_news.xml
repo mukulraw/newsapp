@@ -56,10 +56,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:includeFontPadding="false"
-        android:lineSpacingExtra="-8dp"
-        android:elevation="2dp"
+        android:lineSpacingExtra="-4dp"
+        android:elevation="0dp"
         android:fontFamily="monospace"
-        android:background="@drawable/white_background_round"
         android:ellipsize="end"
         android:padding="8dp"
         android:textSize="16sp"
@@ -92,13 +91,25 @@
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:background="@drawable/white_gradient"
-        android:elevation="2dp"
+        android:elevation="0dp"
         android:fontFamily="monospace"
         android:includeFontPadding="false"
         android:lineSpacingExtra="-16dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="@+id/textView13"
         app:layout_constraintStart_toStartOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView123"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:background="#aa000000"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/textView8"

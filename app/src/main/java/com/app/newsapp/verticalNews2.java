@@ -39,7 +39,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class verticalNews2 extends Fragment {
 
     RoundedImageView image;
-    TextView title, content, date, read;
+    TextView title, content, date, read, subtitle;
     ProgressBar progress;
     NewsActivity mainActivity;
     String id;
@@ -62,6 +62,7 @@ public class verticalNews2 extends Fragment {
         youtubeimage = view.findViewById(R.id.youtubeimage);
         youtube = view.findViewById(R.id.textView8);
         read = view.findViewById(R.id.textView19);
+        subtitle = view.findViewById(R.id.textView123);
 
         progress.setVisibility(View.VISIBLE);
 
@@ -91,6 +92,8 @@ public class verticalNews2 extends Fragment {
                 if (response.body().getStatus().equals("1")) {
                     Data item = response.body().getData();
 
+                    read.setText("और पढ़ें " + item.getNews_source() + " पर >");
+                    subtitle.setText(item.getSub_title());
 
                     DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
                     ImageLoader loader = ImageLoader.getInstance();

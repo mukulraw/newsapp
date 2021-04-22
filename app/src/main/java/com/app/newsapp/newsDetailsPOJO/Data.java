@@ -34,6 +34,12 @@ public class Data {
     @SerializedName("page_link")
     @Expose
     private String page_link;
+    @SerializedName("sub_title")
+    @Expose
+    private String sub_title;
+    @SerializedName("news_source")
+    @Expose
+    private String news_source;
 
     public String getId() {
         return id;
@@ -113,5 +119,21 @@ public class Data {
 
     public void setPage_link(String page_link) {
         this.page_link = page_link;
+    }
+
+    public String getNews_source() {
+        return news_source;
+    }
+
+    public String getSub_title() {
+        return sub_title;
+    }
+
+    public void setNews_source(String news_source) {
+        this.news_source = news_source;
+    }
+
+    public void setSub_title(String sub_title) {
+        this.sub_title = sub_title;
     }
 }
