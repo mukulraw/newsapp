@@ -128,7 +128,7 @@ public class verticalNews extends Fragment {
 
                     title.setText(item.getTitle());
                     date.setText(item.getCreated());
-                    content.setText(Html.fromHtml(item.getContent()));
+                    content.setText(Html.fromHtml(item.getContent()).toString().trim());
 
                     read.setOnClickListener(new View.OnClickListener() {
                         @Override
