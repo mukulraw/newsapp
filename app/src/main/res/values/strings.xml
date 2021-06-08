@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">NewZer</string>
+    <string name="app_name">NewZerr</string>
     <string name="alarm_notification">alarm_notification</string>
+<!--    <string name="default_web_client_id">308621210687-8uuh5rms43b0foa5o2ikf788gsglqojg.apps.googleusercontent.com</string>-->
 </resources>
